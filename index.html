@@ -4,15 +4,476 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <title>Web Technology Lab | Experiments</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            color: white;
+            overflow-x: hidden;
+            background: radial-gradient(circle at 10% 20%, #4f46e5 0%, transparent 25%), radial-gradient(circle at 90% 80%, #ec4899 0%, transparent 30%), linear-gradient(135deg, #0f172a, #1e1b4b, #111827);
+        }
+        /* Animated background circles */
+        
+        .circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+        }
+        
+        .circle1 {
+            width: 300px;
+            height: 300px;
+            background: #7c3aed;
+            top: -100px;
+            left: -100px;
+            animation: float 8s infinite alternate;
+        }
+        
+        .circle2 {
+            width: 350px;
+            height: 350px;
+            background: #ec4899;
+            bottom: -150px;
+            right: -100px;
+            animation: float 10s infinite alternate-reverse;
+        }
+        
+        @keyframes float {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(100px, 80px);
+            }
+        }
+        /* Navbar */
+        
+        nav {
+            width: 100%;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+        
+        .logo span {
+            color: #a78bfa;
+        }
+        
+        .badge {
+            padding: 8px 18px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 13px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        /* Main Container */
+        
+        .container {
+            width: min(1100px, 90%);
+            margin: auto;
+            padding: 70px 0;
+        }
+        /* Hero Section */
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeDown 1s ease;
+        }
+        
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-tag {
+            display: inline-block;
+            padding: 8px 18px;
+            margin-bottom: 20px;
+            border-radius: 30px;
+            background: rgba(139, 92, 246, 0.2);
+            color: #c4b5fd;
+            border: 1px solid rgba(167, 139, 250, 0.4);
+            font-size: 13px;
+        }
+        
+        h1 {
+            font-size: clamp(38px, 6vw, 70px);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        
+        h1 span {
+            background: linear-gradient(90deg, #a78bfa, #f472b6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            color: #cbd5e1;
+            font-size: 17px;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.8;
+        }
+        /* Section Title */
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 25px;
+        }
+        
+        .section-title .line {
+            height: 1px;
+            flex: 1;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        /* Experiment Cards */
+        
+        .experiments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        
+        .card {
+            position: relative;
+            padding: 30px;
+            min-height: 260px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            overflow: hidden;
+            transition: 0.4s ease;
+            animation: fadeUp 0.8s ease backwards;
+        }
+        
+        .card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        
+        .card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        
+        .card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        
+        .card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Card hover glow */
+        
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            background: #8b5cf6;
+            filter: blur(100px);
+            opacity: 0;
+            top: -80px;
+            right: -80px;
+            transition: 0.4s;
+        }
+        
+        .card:hover::before {
+            opacity: 0.7;
+        }
+        
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(167, 139, 250, 0.7);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-number {
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            background: linear-gradient(135deg, #7c3aed, #db2777);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+        }
+        
+        .card h3 {
+            margin: 25px 0 10px;
+            font-size: 22px;
+        }
+        
+        .card p {
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: 0.3s;
+        }
+        
+        .btn:hover {
+            background: white;
+            color: #312e81;
+            transform: translateX(5px);
+        }
+        /* Footer */
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #94a3b8;
+            font-size: 13px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        /* Responsive */
+        
+        @media (max-width: 600px) {
+            nav {
+                padding: 18px 5%;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            .badge {
+                display: none;
+            }
+            .container {
+                padding: 50px 0;
+            }
+            .hero {
+                margin-bottom: 45px;
+            }
+            .card {
+                min-height: auto;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <a href="./exp1a.html">Exp 1a</a><br>
-    <a href="./exp1b.html">Exp 1b</a><br>
-    <a href="./exp1c.html">Exp 1c</a><br>
-    <a href="./exp1d.html">Exp 1d</a><br>
-    <a href="./exp1e.html">Exp 1e</a>
+
+    <!-- Background Effects -->
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">WEB<span>LAB</span></div>
+
+        <div class="badge">
+            ✨ Web Technology Experiments
+        </div>
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="container">
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="hero-tag">
+                🚀 EXPERIMENT PORTFOLIO
+            </div>
+
+            <h1>
+                Welcome to My <br>
+                <span>Web Development Lab</span>
+            </h1>
+
+            <p>
+                Explore a collection of web technology experiments, designed and developed to demonstrate creativity, innovation and modern web development skills.
+            </p>
+
+        </section>
+
+
+        <!-- Experiment Section -->
+        <div class="section-title">
+            <h2>Experiments</h2>
+            <div class="line"></div>
+        </div>
+
+
+        <section class="experiments">
+
+            <!-- Experiment 1A -->
+            <div class="card">
+
+                <div class="card-number">1A</div>
+
+                <h3>Experiment 1A</h3>
+
+                <p>
+                    Explore the implementation and concepts developed in the first part of Experiment 1.
+                </p>
+
+                <a href="./exp1a.html" class="btn">
+                    Open Experiment →
+                </a>
+
+            </div>
+
+
+            <!-- Experiment 1B -->
+            <div class="card">
+
+                <div class="card-number">1B</div>
+
+                <h3>Experiment 1B</h3>
+
+                <p>
+                    Discover the next stage of Experiment 1 with an interactive web implementation.
+                </p>
+
+                <a href="./exp1b.html" class="btn">
+                    Open Experiment →
+                </a>
+
+            </div>
+
+
+            <!-- Experiment 1C -->
+            <div class="card">
+
+                <div class="card-number">1C</div>
+
+                <h3>Experiment 1C</h3>
+
+                <p>
+                    A creative implementation demonstrating important web development concepts.
+                </p>
+
+                <a href="./exp1c.html" class="btn">
+                    Open Experiment →
+                </a>
+
+            </div>
+
+
+            <!-- Experiment 1D -->
+            <div class="card">
+
+                <div class="card-number">1D</div>
+
+                <h3>Experiment 1D</h3>
+
+                <p>
+                    Explore advanced elements and modern techniques used in web development.
+                </p>
+
+                <a href="./exp1d.html" class="btn">
+                    Open Experiment →
+                </a>
+
+            </div>
+
+
+            <!-- Experiment 1E -->
+            <div class="card">
+
+                <div class="card-number">1E</div>
+
+                <h3>Experiment 1E</h3>
+
+                <p>
+                    The final section of Experiment 1, bringing together all the concepts.
+                </p>
+
+                <a href="./exp1e.html" class="btn">
+                    Open Experiment →
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        Designed & Developed with ❤️ for Web Technology Laboratory
+        <br><br> © 2026 | All Rights Reserved
+    </footer>
+
 </body>
 
 </html>
