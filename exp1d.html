@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Button Click Event</title>
+  </head>
+  <body>
+    <h2>Click the buttons below:</h2>
+    <button id="btn1">Button 1</button>
+    <button id="btn2">Button 2</button>
+    <button id="btn3">Button 3</button>
+    <p id="output"></p>
+    <script>
+      const output = document.getElementById("output");
+       document.getElementById("btn1").addEventListener("click", function() {
+      output.innerText = "B.Tech III Year CSE";
+      });
+      document.getElementById("btn2").addEventListener("click", function() {
+      output.innerText = "Computer Science and Engineering";
+      });
+      document.getElementById("btn3").addEventListener("click", function() {
+      output.innerText = "Full Stack Development - II";
+      });
+    </script>
+  </body>
+</html>

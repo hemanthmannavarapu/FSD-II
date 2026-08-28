@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>DOM Selectors</title>
+  </head>
+  <body>
+    <h1 id="title">Welcome</h1>
+    <p class="description">This is a paragraph.</p>
+    <p class="description">Another paragraph.</p>
+    <button name="myButton">Click Me</button>
+    <script>
+        const descriptions = document.getElementsByClassName("description");
+        console.log("Elements with class 'description':", descriptions);
+
+        const allParagraphs = document.getElementsByTagName("p");   
+        console.log("All <p> elements:",allParagraphs);
+        
+        const buttonByName = document.getElementsByName("myButton");
+        console.log("Button with name 'myButton':", buttonByName);
+
+        const firstParagraph = document.querySelector(".description");
+        console.log("First element with class 'description':", firstParagraph);
+
+        const allDescriptions = document.querySelectorAll(".description");
+        console.log("All elements with class 'description':", allDescriptions);
+
+
+    </script>
+
+  </body>
+</html>
